@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.Service>
+@{
+    ViewData["Title"] = "Главная страница";
+}
+<section>
+    <img src="~/home.png" style="object-fit:cover;width:100%" class="img-fluid" />
+</section>
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Предлагаемые услуги</h1>
+    </div>
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="card w-100 shadow col-md-12">
+                    <center>
+                        <img src="~/services/@item.ServiceID@item.ExtName" alt="" style="width:100%;height:200px">
+                    </center>
+                    <div class="card-body">
+                        <h5 class="card-text text-center">
+                            @item.ServiceName
+                        </h5>
+                    </div>
+                    <a class="btn btn-primary btn-block" asp-action="ViewPackages" asp-route-id="@item.ServiceID">Все пакеты</a>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

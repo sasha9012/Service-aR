@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.Service>
+
+@{
+    ViewData["Title"] = "ВсеПакеты";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Все операции с пакетами</h1>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12 mb-3">
+                <h1>
+                    <img src="~/services/@item.ServiceID@item.ExtName" alt="" class="img-fluid">
+                    @item.ServiceName
+                </h1>
+                @if (item.Packages.Count > 0)
+                {
+                    <div class="row">
+                        @foreach (var package in item.Packages)
+                        {
+
+                            <div class="col-md-6 mb-3">
+                                <div class="card w-100 shadow col-md-12">
+                                    <div class="card-body">
+                                        <h5 class="card-text text-center font-weight-bold">
+                                            @package.PackageName  (@package.TimeTaken)
+                                        </h5>
+                                        <ul class="list-inline">
+                                            @if (!package.Warrnty.Equals("None"))
+                                            {
+                                                <li>@package.Warrnty</li>
+                                            }
+                                            @if (!package.NextService.Equals("None"))
+                                            {
+                                                <li>@package.NextService</li>
+                                            }
+                                        </ul>
+                                        <h5>Включённые услуги</h5>
+                                        <ul>
+                                            @foreach (var service in package.Services.Split(","))
+                                            {
+                                                <li>@service</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12 text-center">
+                                            <a asp-action="BookPackage" class="btn btn-primary" asp-route-id="@package.PackageID">Забронировать пакет</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.Package>
+
+@{
+    ViewData["Title"] = "ПросмотрПакетов";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">@ViewData["ServiceName"]</h1>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="card w-100 shadow col-md-12">
+                    <div class="card-body">
+                        <h5 class="card-text text-center font-weight-bold">
+                            @item.PackageName (@item.TimeTaken)
+                        </h5>
+                        <ul>
+                            @if (!item.Warrnty.Equals("None"))
+                            {
+                                <li>@item.Warrnty</li>
+                            }
+                            @if (!item.NextService.Equals("None"))
+                            {
+                                <li>@item.NextService</li>
+                            }
+                        </ul>
+                        <a class="btn btn-primary btn-block" asp-action="ViewPackageDetails" asp-route-id="@item.PackageID">Детали пакета</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

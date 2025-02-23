@@ -1,0 +1,42 @@
+﻿@model ServiceStationWebApp.Models.Package
+
+@{
+    ViewData["Title"] = "ПросмотрДеталейПакета";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">@Model.PackageName</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card w-100 shadow col-md-12">
+                <div class="card-body">
+                    <h5 class="card-text text-center font-weight-bold">
+                        @Model.TimeTaken
+                    </h5>
+                    <ul class="list-inline">
+                        @if (!Model.Warrnty.Equals("None"))
+                        {
+                            <li>@Model.Warrnty</li>
+                        }
+                        @if (!Model.NextService.Equals("None"))
+                        {
+                            <li>@Model.NextService</li>
+                        }
+                    </ul>
+                    <h5>Покрываемые услуги</h5>
+                    <ul>
+                        @foreach (var item in Model.Services.Split(","))
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                    <a class="btn btn-primary" asp-action="BookPackage" asp-route-id="@Model.PackageID">Забронировать пакет</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

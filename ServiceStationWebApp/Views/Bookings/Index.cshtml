@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Бронирование</h1>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12 mb-3">
+                <div class="card w-100 shadow col-md-12">
+                    <div class="card-body">
+                        <h5 class="card-text text-center font-weight-bold">
+                            @item.Package.PackageName for (@item.CarModel.CarModelName)
+                        </h5>
+                        <p class="text-center font-weight-bold">User Name: @item.UserName</p>
+                        <p class="text-center font-weight-bold">Contact No: @item.ContactNo</p>
+                        <p class="text-center font-weight-bold">Booking Date: @item.BookingDate</p>
+                        <p class="text-center font-weight-bold">Status: @item.Status</p>
+                        <ul class="list-inline">
+                            @if (!item.Package.Warrnty.Equals("None"))
+                            {
+                                <li>@item.Package.Warrnty</li>
+                            }
+                            @if (!item.Package.NextService.Equals("None"))
+                            {
+                                <li>@item.Package.NextService</li>
+                            }
+                        </ul>
+                        <h5>Услуги</h5>
+                        <ul>
+                            @foreach (var service in item.Package.Services.Split(","))
+                            {
+                                <li>@service</li>
+                            }
+                        </ul>
+                        @if (item.Status.Equals("Pending"))
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-12 text-center">
+                                    <form asp-action="ConfirmBooking" class="mb-3">
+                                        <input type="hidden" name="id" value="@item.BookingID" />
+                                        <input type="submit" value="Confirm Booking" class="btn btn-danger" />
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,25 @@
+services:
+  servicecar:
+    image: ${DOCKER_REGISTRY-}servicecar
+    build:
+      context: .
+      dockerfile: ServiceStationWebApp/Dockerfile
+    depends_on:
+      - sqlserver
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app-network
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest 
+    container_name: sqlserver_container
+    environment:
+      ACCEPT_EULA: "Y"  
+      SA_PASSWORD: "SASHA1q2w3e4r5t"  
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+networks:
+  app-network:

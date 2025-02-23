@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.Brand>
+
+@{
+    ViewData["Title"] = "ВсеАвтомобили";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Доступные услуги для перечисленных брендов</h1>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12 mb-3">
+                <h1>
+                    <img src="~/brands/@item.BrandID@item.ExtName" alt="" class="img-fluid">
+                    @item.BrandName
+                </h1>
+                @if (item.CarModels.Count > 0)
+                {
+                    <div class="row">
+                        @foreach (var car in item.CarModels)
+                        {
+
+                            <div class="col-md-3 mb-3">
+                                <div class="card w-100 shadow col-md-12">
+                                    <center>
+                                        <img src="~/models/@car.CarModelID@item.ExtName" alt="" style="width:100%;height:200px">
+                                    </center>
+                                    <div class="card-body">
+                                        <h5 class="card-text text-center">
+                                            @car.CarModelName
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+

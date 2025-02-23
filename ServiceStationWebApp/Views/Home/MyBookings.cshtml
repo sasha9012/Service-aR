@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "МоиБронирования";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Мои бронирования</h1>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12 mb-3">
+                <div class="card w-100 shadow col-md-12">
+                    <div class="card-body">
+                        <h5 class="card-text text-center font-weight-bold">
+                            @item.Package.PackageName для (@item.CarModel.CarModelName)
+                        </h5>
+                        <p class="text-center font-weight-bold">Дата бронирования: @item.BookingDate</p>
+                        <p class="text-center font-weight-bold">Статус: @item.Status</p>
+                        <ul class="list-inline">
+                            @if (!item.Package.Warrnty.Equals("None"))
+                            {
+                                <li>@item.Package.Warrnty</li>
+                            }
+                            @if (!item.Package.NextService.Equals("None"))
+                            {
+                                <li>@item.Package.NextService</li>
+                            }
+                        </ul>
+                        <h5>Покрываемые услуги</h5>
+                        <ul>
+                            @foreach (var service in item.Package.Services.Split(","))
+                            {
+                                <li>@service</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

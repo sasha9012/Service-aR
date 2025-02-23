@@ -1,0 +1,37 @@
+﻿@model ServiceStationWebApp.Models.CarModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Car Model Operations</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <div class="card w-100 shadow col-md-12">
+                <center>
+                    <img src="~/models/@Model.CarModelID@Model.ExtName" alt="" style="width:100%;height:200px">
+                </center>
+                <div class="card-body">
+                    <h5 class="card-text text-center">
+                        @Model.CarModelName (@Model.Brand.BrandName)
+                    </h5>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="CarModelID" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="~/common.png" class="img-fluid" />
+        </div>
+    </div>
+</div>

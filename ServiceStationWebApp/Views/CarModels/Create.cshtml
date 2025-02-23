@@ -1,0 +1,43 @@
+﻿@model ServiceStationWebApp.Models.CarModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Car Model Operations</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="BrandID" class="control-label"></label>
+                    <select asp-for="BrandID" class="form-control" asp-items="ViewBag.BrandID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CarModelName" class="control-label"></label>
+                    <input asp-for="CarModelName" class="form-control" />
+                    <span asp-validation-for="CarModelName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FileUpload.FormFile" class="control-label"></label>
+                    <input asp-for="FileUpload.FormFile" type="file" class="form-control">
+                    <span asp-validation-for="FileUpload.FormFile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save Details" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <img src="~/common.png" class="img-fluid" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

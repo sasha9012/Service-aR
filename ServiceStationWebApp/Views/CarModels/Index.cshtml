@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ServiceStationWebApp.Models.CarModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="my-font display-4">Car Model Operations <a asp-action="Create" class="btn btn-primary">New Car Model</a></h1>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="card w-100 shadow col-md-12">
+                    <center>
+                        <img src="~/models/@item.CarModelID@item.ExtName" alt="" style="width:100%;height:200px">
+                    </center>
+                    <div class="card-body">
+                        <h5 class="card-text text-center">
+                            @item.CarModelName (@item.Brand.BrandName)
+                        </h5>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.CarModelID">Edit</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.CarModelID">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
